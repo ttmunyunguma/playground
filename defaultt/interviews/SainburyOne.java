@@ -1,4 +1,4 @@
-package defaultt.dynamic;
+package defaultt.interviews;
 
 import java.util.Arrays;
 
