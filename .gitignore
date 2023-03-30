@@ -35,3 +35,7 @@ replay_pid*
 /dataSources.local.xml
 
 /out
+.idea/misc.xml
+.idea/sonarlint/issuestore/index.pb
+out/production/playground/playground.iml
+
