@@ -1,7 +1,5 @@
 package defaultt.interviews;
 
-import java.util.Arrays;
-
 /**
  * The chessboard bellow has 64 squares, 8 rows and 8 columns. Each row is labeled from 1 to 8 and each column is labeled
  * from a to h (lowercase). A square is located at the intersection of a row and of a column, like square 2C it's the
@@ -39,12 +37,44 @@ public class SainburyOne {
          * Write your code below; return type and arguments should be according to the problem's requirements
          */
 
-        int rowPosition = startPosition.charAt(0);
-        char columnPosition = startPosition.charAt(1);
+        // Parse startPosition to extract row and column
+        int startRow = Character.getNumericValue(startPosition.charAt(0));
+        char startColChar = startPosition.charAt(1);
+        int startCol = startColChar - 'a' + 1;
 
-        String endPosition = "";
-        return endPosition;
+        // Calculate new row and column with wrapping
+        int newRow = (startRow - 1 + R) % 8 + 1;
+        int newCol = (startCol - 1 + C) % 8 + 1;
+
+        // Convert new column back to a character
+        char newColChar = (char) ('a' + newCol - 1);
+
+        // Form the new position string
+        return newRow + String.valueOf(newColChar);
     }
+
+    public static String findEndPosition(String startPosition, int R, int C) {
+        // Parse startPosition to extract row and column
+        int startRow = Character.getNumericValue(startPosition.charAt(0));
+        char startColChar = startPosition.charAt(1);
+        int startCol = startColChar - 'a' + 1;
+
+        // Calculate new row and column with wrapping
+        int newRow = (startRow - 1 + R) % 8 + 1;
+        int newCol = (startCol - 1 + C) % 8 + 1;
+
+        // Convert new column back to a character
+        char newColChar = (char) ('a' + newCol - 1);
+
+        // Form the new position string
+        return newRow + String.valueOf(newColChar);
+    }
+//    public static void main(String[] args) {
+//        System.out.println(findEndPosition("2b", 3, 2)); // Output: 5d
+//        System.out.println(findEndPosition("5h", 11, 25)); // Output: 8a
+//    }
+
+
 
     /**
      * 1. From the last digit moving backwards, double every second digit
@@ -53,20 +83,17 @@ public class SainburyOne {
      * 4. If the total ends in zero, then the number is a valid credit card
      */
     public static void main(String[] args) {
-        new SainburyOne().isValid("4242424242426742");
+        System.out.println(new SainburyOne().isValid("4242424242426742"));
     }
     public boolean isValid(String cardNumber) {
 
         char[] cardNumsCharArray = cardNumber.toCharArray();
-        System.out.println(Arrays.toString(cardNumsCharArray));
 
         int[] cardNumIntArray = new int[cardNumsCharArray.length];
-        System.out.println(Arrays.toString(cardNumIntArray));
 
         for (int i = 0; i < cardNumsCharArray.length; i++){
             cardNumIntArray[i] = Integer.parseInt(String.valueOf(cardNumsCharArray[i]));
         }
-        System.out.println(Arrays.toString(cardNumIntArray));
         //[4242424242,4,2,6,7,4,2]
         for (int i = cardNumIntArray.length - 1; i >= 0; i = i-3){
             int temp = i * 2;
@@ -82,13 +109,11 @@ public class SainburyOne {
             }
             cardNumIntArray[i] = temp;
         }
-        System.out.println(Arrays.toString(cardNumIntArray));
 
         int sum = 0;
         for (int digit : cardNumIntArray) {
             sum = sum + digit;
         }
-        System.out.println(sum);
         return sum == 0;
     }
 }
